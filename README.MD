@@ -32,7 +32,21 @@ Start the images
 docker-compose up
 ```
 
+## First time setup
 If the images are not present they will be downloaded.
+
+Run the following commands to initialise conda
+
+```docker
+
+docker-compose up -d
+docker exec -it web bash
+```
+A shell command for your contianer will open
+```shell
+. docker/init_conda.sh && exit
+```
+
 
 After a few seconds, you should be able to access minoTour at <http://localhost:8100/>
 
