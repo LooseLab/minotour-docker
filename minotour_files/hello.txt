@@ -1,0 +1,20 @@
+.
+|-- primer_schemes
+|   |-- nCoV-2019
+|   |   |-- V1
+|   |   |-- V2
+|   |   |-- V3
+|   |   `-- V4
+|   |-- Nipah
+|   |   `-- V1
+|   |-- SARS-CoV-2 -> nCoV-2019
+|   |-- scripts
+|   `-- ZaireEbola
+|       |-- V1
+|       |-- V2
+|       `-- V3
+`-- references
+    |-- minimap2_indexes
+    `-- reference_files
+
+17 directories
