@@ -42,7 +42,7 @@ Run the following commands to initialise conda
 docker-compose up -d
 docker exec -it web bash
 ```
-A shell command for your contianer will open
+A shell command for your container will open
 ```shell
 . docker/init_conda.sh && exit
 ```
@@ -53,7 +53,7 @@ After a few seconds, you should be able to access minoTour at <http://localhost:
 To create an admin user:
 
 ```bash
-docker-compose exec -it web python manage.py createsuperuser
+docker exec -it web python manage.py createsuperuser
 ``` 
 
 Or to create a standard user just use the GUI!
