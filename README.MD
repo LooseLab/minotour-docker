@@ -139,3 +139,6 @@ We do not distribute any indexes, some a compressed pre-made index containing ba
  
 After placing any files into the localdata folder on you host system, run the following the commands to
 make them available to minoTour.
+
+### Debugging
+Please refer to [Debugging.md](Debugging.md)
