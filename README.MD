@@ -37,9 +37,7 @@ If the images are not present they will be downloaded.
 
 Run the following commands to initialise conda
 
-```docker
-
-docker-compose up -d
+```bash
 docker exec -it web bash
 ```
 A shell command for your container will open
