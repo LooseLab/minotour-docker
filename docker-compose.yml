@@ -61,6 +61,7 @@ services:
             MT_COVERAGE_PER_AMPLICON: "20"
             # the bin which aln2type is under todo add to dockerfile when i have time
             MT_ALN2TYPE_BIN: "/root/miniconda3/bin/"
+            MT_CENTRIFUGE_INDEX: "/var/lib/minotour/apps/data/centrifuge_indexes"
 
         ports:
             - 8100:8100

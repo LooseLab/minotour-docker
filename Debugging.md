@@ -2,7 +2,7 @@
 In order to debug minotour in docker, there are a couple of possible approaches.
 
 #### Exec in and read celery logs
-Due to an unfortunate misunderstanding of dockey, celery and django are smushed into one container. This makes reading the logs a little tricky.
+Due to an unfortunate misunderstanding of docker (by me), celery and django are smushed into one container. This makes reading the logs a little tricky. Fixing this is on my todo list
 
 Whilst the container is running it is possible to see the logged output of celery workers 
 ```bash

@@ -27,24 +27,13 @@ Change to the docker-compose-test folder
 cd docker-compose-test
 ``` 
 
-Start the images
+Start the images (-d means daemon, so the images run in the background)
 ```bash
-docker-compose up
+docker-compose up -d
 ```
 
 ## First time setup
 If the images are not present they will be downloaded.
-
-Run the following commands to initialise conda
-
-```bash
-docker exec -it web bash
-```
-A shell command for your container will open
-```shell
-. docker/init_conda.sh && exit
-```
-
 
 After a few seconds, you should be able to access minoTour at <http://localhost:8100/>
 
@@ -84,7 +73,7 @@ can access files inside this folder. To start with the folder should currently h
         |-- minimap2_indexes
         `-- reference_files
 
-### To add references over 256Mb
+## To add references over 256Mb
 *__Note: You will need your API-KEY, found in your profile details after login__*
 
 Copy the reference (or sym-link if that's your flavour) into the minotour_files/references/reference_files directory and then run the following command
@@ -92,51 +81,43 @@ Copy the reference (or sym-link if that's your flavour) into the minotour_files/
 docker exec web python manage.py add_reference -k <API-KEY> /var/lib/minotour/apps/data/references/reference_files/<REF_FILE_NAME>
 ```
 
-### To add Primer schemes for the artic pipeline
-Add them to the minotour_files/primer_schemes folder. Create a species directory (If not already present) and add a Version (V1, V2, etc)
-Inside the scheme two files are required:
+## To add Primer schemes for the artic pipeline
+
+For a scheme two files are required:
 - <new_species>.scheme.bed
 - <new_species>.reference.fasta
 
-These files must share the same file name as the species directory you added.
-For example:
+Where new species has the same name. Their is a management page for primer schemes in the right hand side bar of minoTour. Drag and drop the two files (or 
+use the built in browser selector), give them a version name and upload them. And you're good to go!
 
-    minotour_files
-    |
-    |-- primer_schemes
-        |-- <new_species>
-            |-- V1
-                |-- <new_species>.scheme.bed
-                |-- <new_species>.reference.fasta
+## To add Centrifuge indexes
 
-The reference must also be added to minoTour, either via the GUI or using 
-```bash
-docker exec web python manage.py add_reference -k <API-KEY> /var/lib/minotour/apps/data/primer_schemes/<new_species>/<V*>/<new_species>.reference.fasta
-```
 
-Finally the environment variables in the docker-compose file must be set to reflect the scheme you wish to use
-, specifically: 
- ```docker
-    MT_ARTIC_SCHEME_NAME: 'SARS-CoV-2'
-    MT_ARTIC_SCHEME_VER: 'V4'
-```
-
-### Adding Centrifuge indexes
-
-Create a centrifuge index folder and add the .cf files for your index - 
+Create a centrifuge index folder in the minotour_files folder and add the .cf files for your index, for example - 
     
     minotour_files
     |
     |-- centrifuge_indexes
-        |-- *.1.cf
-        |-- *.2.cf
-        |-- *.3.cf
-        |-- *.4.cf
+        |-- example.1.cf
+        |-- example.2.cf
+        |-- example.3.cf
+        |-- example.4.cf
 
-We do not distribute any indexes, some a compressed pre-made index containing bacteria and viruses can can be dowloaded from [JHU](ftp://ftp.ccb.jhu.edu/pub/infphilo/centrifuge/data/p_compressed_2018_4_15.tar.gz).
+We do not distribute any indexes, a compressed pre-made index containing bacteria and viruses can can be dowloaded from [JHU](ftp://ftp.ccb.jhu.edu/pub/infphilo/centrifuge/data/p_compressed_2018_4_15.tar.gz).
  
-After placing any files into the localdata folder on you host system, run the following the commands to
-make them available to minoTour.
+Stop the containers currently running
+
+```bash 
+docker-compose stop
+```
+
+Set the `MT_CENTRIFUGE_INDEX` variable in the docker-compose.yml to `/var/lib/minotour/data/centrifuge_indexes/example` where example is the name of your index, excluding any numbers and file suffix.
+
+Restart your containers -
+
+```bash
+docker-compose up -d
+```
 
 ### Debugging
 Please refer to [Debugging.md](Debugging.md)
