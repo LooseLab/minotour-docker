@@ -25,3 +25,13 @@ tail -f -n 100 /var/lib/minotour/logs/uwsgi.log
 Will stream access and the output of any django views - there may be error there.
 
 As these are normal files it is possible to also `grep` for any errors or to seek out specific commands.
+
+for example to debug ARTIC - 
+
+```bash
+grep -ni "Error" /var/lib/minotour/logs/celery.log
+```
+or
+```bash
+grep -ni "command" /var/lib/minotour/logs/celery.log
+```
