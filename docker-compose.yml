@@ -20,7 +20,7 @@ services:
             - db_data_dir:/var/lib/mysql
 
     web:
-        image: adoni5/minotourapp_web
+        image: adoni5/minotourapp_web:latest
         command: bash --login -c "conda deactivate && uwsgi --ini minotourapp_uwsgi.ini && python manage.py makemigrations && python manage.py migrate && python manage.py loaddata fixtures/auxiliary_data.json && /etc/init.d/celeryd start && celery -A minotourapp beat -l debug -f /var/lib/minotour/logs/celerybeat.log --detach && nginx -g 'daemon off;'  && echo done"
         container_name: web
         environment:
@@ -62,6 +62,7 @@ services:
             # the bin which aln2type is under todo add to dockerfile when i have time
             MT_ALN2TYPE_BIN: "/root/miniconda3/bin/"
             MT_CENTRIFUGE_INDEX: "/var/lib/minotour/apps/data/centrifuge_indexes"
+            MT_SKIP_MUSCLE: 1
 
         ports:
             - 8100:8100
