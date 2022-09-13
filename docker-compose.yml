@@ -20,7 +20,7 @@ services:
             - db_data_dir:/var/lib/mysql
 
     web:
-        image: minotourapp_web:dev
+        image: adoni5/minotourapp_web:dev
         command: bash --login -c "conda deactivate && uwsgi --ini minotourapp_uwsgi.ini && python manage.py makemigrations && python manage.py migrate && python manage.py loaddata fixtures/auxiliary_data.json && /etc/init.d/celeryd start && celery -A minotourapp beat -l debug -f /var/lib/minotour/logs/celerybeat.log --detach && nginx -g 'daemon off;'  && echo done"
         container_name: web
         environment:
